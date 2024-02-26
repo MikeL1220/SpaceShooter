@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 
     public float speed = 3.5f; 
 
-    private Vector3 _laserOffset = new Vector3(0f, 0.8f, 0); 
+    private Vector3 _laserOffset = new Vector3(-.009f, 1f, 0); 
 
   [SerializeField]
     private GameObject _laserPrefab; 
