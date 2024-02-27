@@ -9,8 +9,6 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject _enemyContainer; 
 
-    private float _SpawnTimer;
-
     private bool _stopSpawning = false; 
 
     // Start is called before the first frame update

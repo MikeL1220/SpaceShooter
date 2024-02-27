@@ -6,12 +6,12 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private float _enemySpeed = 4; 
-    private float randomX;
+    private float _randomX;
 
     // Start is called before the first frame update
     void Start()
     {
-        randomX = Random.Range(-9.38f,9.38f);
+        
     }
 
     // Update is called once per frame
@@ -22,7 +22,8 @@ public class Enemy : MonoBehaviour
 
         if(transform.position.y < -6.5f)
         {
-            transform.position = new Vector3(randomX, 7f, 0); 
+            _randomX = Random.Range(-9.38f, 9.38f);
+            transform.position = new Vector3(_randomX, 7f, 0); 
             transform.Translate(Vector3.down * _enemySpeed * Time.deltaTime);
         }
 
@@ -44,8 +45,9 @@ public class Enemy : MonoBehaviour
         }
         else if(other.tag == "Laser")
         {
-            Destroy(this.gameObject);
             Destroy(other.gameObject);
+            Destroy(this.gameObject);
+
         }
 
     }
