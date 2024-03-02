@@ -5,25 +5,20 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    private float _enemySpeed = 4; 
+    private float _enemySpeed = 4;
+
     private float _randomX;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
 
-        transform.Translate(Vector3.down* _enemySpeed * Time.deltaTime); 
+        transform.Translate(Vector3.down * _enemySpeed * Time.deltaTime);
 
-        if(transform.position.y < -6.5f)
+        if (transform.position.y < -6.5f)
         {
             _randomX = Random.Range(-9.38f, 9.38f);
-            transform.position = new Vector3(_randomX, 7f, 0); 
+            transform.position = new Vector3(_randomX, 7f, 0);
             transform.Translate(Vector3.down * _enemySpeed * Time.deltaTime);
         }
 
@@ -31,11 +26,11 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Hit" + other.transform.name);
-        
-        if(other.tag == "Player")
+
+        if (other.tag == "Player")
         {
             Player player = other.transform.GetComponent<Player>();
-            if(player != null)
+            if (player != null)
             {
                 other.transform.GetComponent<Player>();
                 player.Damage();
@@ -43,7 +38,7 @@ public class Enemy : MonoBehaviour
 
             Destroy(this.gameObject);
         }
-        else if(other.tag == "Laser")
+        else if (other.tag == "Laser")
         {
             Destroy(other.gameObject);
             Destroy(this.gameObject);

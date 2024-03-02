@@ -6,23 +6,22 @@ public class Player : MonoBehaviour
 {
 
     [SerializeField]
+    private int _lives = 3;
+    [SerializeField]
     private float _speed = 3.5f;
 
     private Vector3 _laserOffset = new Vector3(-.009f, 1f, 0);
-
     [SerializeField]
     private GameObject _laserPrefab;
-
     private float _fireRate = 0.15f;
-
     private float _canFire;
-    [SerializeField]
-    private int _lives = 3;
 
     private SpawnManager _spawnManager;
 
 
-    // Start is called before the first frame update
+    private bool _tripleShotActive = false;
+    [SerializeField]
+    private GameObject _tripleShotPrefab;
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
@@ -33,7 +32,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         CalculateMovement();
@@ -45,9 +43,7 @@ public class Player : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        transform.Translate(Vector3.right * horizontalInput * _speed * Time.deltaTime);
-        transform.Translate(Vector3.up * verticalInput * _speed * Time.deltaTime);
-        //combine into single transfomr using horizontal and vertical together in one vector3 
+        transform.Translate(new Vector3(horizontalInput, verticalInput, 0) * _speed * Time.deltaTime);
 
         if (transform.position.y >= 0)
         {
@@ -77,21 +73,44 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
         {
             _canFire = Time.time + _fireRate;
-            Instantiate(_laserPrefab, (transform.position + _laserOffset), Quaternion.identity);
+
+            if (_tripleShotActive == true)
+            {
+                Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+            }
+            else
+            {
+
+                Instantiate(_laserPrefab, (transform.position + _laserOffset), Quaternion.identity);
+            }
+
+
         }
-    } 
+    }
+
+    public void PowerUpCollected()
+    {
+        _tripleShotActive = true;
+        StartCoroutine(PowerUpHandler());
+
+
+    }
+    IEnumerator PowerUpHandler()
+    {
+        yield return new WaitForSeconds(5f);
+        _tripleShotActive = false;
+    }
 
     public void Damage()
     {
         //_lives =_lives -1
         //_lives --
-        _lives -= 1;  
+        _lives -= 1;
 
-        if(_lives < 1)
+        if (_lives < 1)
         {
-            //communicate with SpawnManager
-            //let them know to stop spawning 
-            _spawnManager.OnPlayerDeath(); 
+
+            _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
         }
     }

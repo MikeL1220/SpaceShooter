@@ -5,37 +5,54 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _enemy; 
+    private GameObject _enemy;
     [SerializeField]
-    private GameObject _enemyContainer; 
+    private GameObject _enemyContainer;
 
-    private bool _stopSpawning = false; 
+    [SerializeField]
+    private GameObject _tripleshotPowerUp;
 
-    // Start is called before the first frame update
+    private bool _stopSpawning = false;
+
+    private float _randomXSpawn;
+
+
     void Start()
     {
-        StartCoroutine(SpawnHandler());
+        StartCoroutine(EnemySpawnHandler());
+        StartCoroutine(PowerUpSpawnHandler());
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
+        _randomXSpawn = Random.Range(-9.38f, 9.38f);
     }
 
-    IEnumerator SpawnHandler()
+    IEnumerator EnemySpawnHandler()
     {
-        while(_stopSpawning == false)
+        while (_stopSpawning == false)
         {
-            GameObject newEnemy = Instantiate(_enemy,new Vector3(Random.Range(-9.38f,9.38f),7f, 0), Quaternion.identity);
+            GameObject newEnemy = Instantiate(_enemy, new Vector3(_randomXSpawn, 7f, 0), Quaternion.identity);
             newEnemy.transform.parent = _enemyContainer.transform;
-            yield return new WaitForSeconds(5f); 
-            
+            yield return new WaitForSeconds(5f);
+
         }
-       
+
+    }
+
+    IEnumerator PowerUpSpawnHandler()
+    {
+        while (_stopSpawning == false)
+        {
+            yield return new WaitForSeconds(Random.Range(5, 10));
+            Instantiate(_tripleshotPowerUp, new Vector3(_randomXSpawn, 7f, 0), Quaternion.identity);
+
+
+        }
     }
     public void OnPlayerDeath()
     {
-        _stopSpawning = true; 
+        _stopSpawning = true;
     }
 }
