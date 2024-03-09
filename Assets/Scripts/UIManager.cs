@@ -31,8 +31,7 @@ public class UIManager : MonoBehaviour
         //Restarts Game
         if (Input.GetKeyDown(KeyCode.R) && _isGameOver == true)
         {
-            AsyncOperation restart = SceneManager.LoadSceneAsync(0); // Current Game Scene
-            Debug.Log("Input reading for restart");
+            AsyncOperation restart = SceneManager.LoadSceneAsync(1); // Current Game Scene
         }
     }
 
