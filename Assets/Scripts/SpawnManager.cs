@@ -10,11 +10,13 @@ public class SpawnManager : MonoBehaviour
     private GameObject _enemyContainer;
 
     [SerializeField]
-    private GameObject _tripleshotPowerUp;
+    private GameObject[] _powerUps;
 
     private bool _stopSpawning = false;
 
     private float _randomXSpawn;
+
+    private int _randomPowerUp;
 
 
     void Start()
@@ -27,6 +29,7 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         _randomXSpawn = Random.Range(-9.38f, 9.38f);
+        _randomPowerUp = Random.Range(0, 2);
     }
 
     IEnumerator EnemySpawnHandler()
@@ -46,9 +49,9 @@ public class SpawnManager : MonoBehaviour
         while (_stopSpawning == false)
         {
             yield return new WaitForSeconds(Random.Range(5, 10));
-            Instantiate(_tripleshotPowerUp, new Vector3(_randomXSpawn, 7f, 0), Quaternion.identity);
-
-
+            int randomPowerUp = Random.Range(0, 3);
+            Instantiate(_powerUps[randomPowerUp], new Vector3(_randomXSpawn, 7f, 0), Quaternion.identity);
+           
         }
     }
     public void OnPlayerDeath()

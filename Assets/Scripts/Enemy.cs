@@ -9,7 +9,13 @@ public class Enemy : MonoBehaviour
 
     private float _randomX;
 
+    private Player _player;  
 
+    void Start()
+    {
+        _player = GameObject.Find("Player").GetComponent<Player>();
+    }
+   
     void Update()
     {
 
@@ -40,8 +46,14 @@ public class Enemy : MonoBehaviour
         }
         else if (other.tag == "Laser")
         {
+           
             Destroy(other.gameObject);
+            if (_player != null)
+            {
+                _player.Score(10); 
+            }
             Destroy(this.gameObject);
+            
 
         }
 
