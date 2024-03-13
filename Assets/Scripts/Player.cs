@@ -17,6 +17,11 @@ public class Player : MonoBehaviour
     private float _fireRate = 0.15f;
     private float _canFire;
 
+    [SerializeField]
+    private GameObject _rightEngineDamage;
+    [SerializeField]
+    private GameObject _leftEngineDamage;
+
     private SpawnManager _spawnManager;
 
     private UIManager _uiManager;
@@ -164,7 +169,14 @@ public class Player : MonoBehaviour
             _playerShield.SetActive(false);
         }
         
-
+        if(_lives <= 2)
+        {
+            _rightEngineDamage.SetActive(true);
+        }
+        if(_lives == 1)
+        {
+            _leftEngineDamage.SetActive(true);
+        }
         if (_lives < 1)
         {
 

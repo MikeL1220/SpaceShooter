@@ -18,8 +18,7 @@ public class SpawnManager : MonoBehaviour
 
     private int _randomPowerUp;
 
-
-    void Start()
+    public void StartSpawning()
     {
         StartCoroutine(EnemySpawnHandler());
         StartCoroutine(PowerUpSpawnHandler());
@@ -34,6 +33,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator EnemySpawnHandler()
     {
+        yield return new WaitForSeconds(2);
         while (_stopSpawning == false)
         {
             GameObject newEnemy = Instantiate(_enemy, new Vector3(_randomXSpawn, 7f, 0), Quaternion.identity);
@@ -46,6 +46,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator PowerUpSpawnHandler()
     {
+        yield return new WaitForSeconds(2);
         while (_stopSpawning == false)
         {
             yield return new WaitForSeconds(Random.Range(5, 10));
