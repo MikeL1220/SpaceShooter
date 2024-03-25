@@ -10,8 +10,7 @@ public class Enemy : MonoBehaviour
     private float _randomX;
 
     private Player _player;
-<<<<<<< HEAD
-=======
+
 
     private Animator _enemyDestruction;
 
@@ -44,26 +43,7 @@ public class Enemy : MonoBehaviour
             Debug.LogError("Animation is Null.");
         }
     }
->>>>>>> e451376 (commit reset issue)
 
-    private Animator _enemyDestruction;
-
-    void Start()
-    {
-        _player = GameObject.Find("Player").GetComponent<Player>();
-        //null check for player 
-        if(_player == null)
-        {
-            Debug.LogError("Player is Null");
-        }
-        //assign refrence to anim 
-        _enemyDestruction = GetComponent<Animator>();
-        if(_enemyDestruction == null)
-        {
-            Debug.LogError("Animation is null.");
-        }
-    }
-   
     void Update()
     {
         EnemyMovement();
@@ -102,64 +82,63 @@ public class Enemy : MonoBehaviour
 
     }
     private void OnTriggerEnter2D(Collider2D other)
-<<<<<<< HEAD
-    { 
-        
-=======
+
     {
 
->>>>>>> e451376 (commit reset issue)
-        if (other.tag == "Player")
+
         {
-            Player player = other.transform.GetComponent<Player>();
-            if (player != null)
+
+
+            if (other.tag == "Player")
             {
-                other.transform.GetComponent<Player>();
-                player.Damage();
+                Player player = other.transform.GetComponent<Player>();
+                if (player != null)
+                {
+                    other.transform.GetComponent<Player>();
+                    player.Damage();
+                }
+                _enemyDestruction.SetTrigger("On_Enemy_Death");
+                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
+                Destroy(this.gameObject, 1.0f);
             }
-            _enemyDestruction.SetTrigger("On_Enemy_Death");
-            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-<<<<<<< HEAD
-            Destroy(this.gameObject,1.0f);
-        }
-        else if (other.tag == "Laser")
-        {
-           
-            Destroy(other.gameObject);
-            if (_player != null)
+            else if (other.tag == "Laser")
             {
-                _player.Score(10); 
+
+                Destroy(other.gameObject);
+                if (_player != null)
+                {
+                    _player.Score(10);
+                }
+                _enemyDestruction.SetTrigger("On_Enemy_Death");
+                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                Destroy(this.gameObject, 1.0f);
+
+
+                Destroy(this.gameObject, 1.0f);
+                _enemyExplosionSound.Play();
+
             }
-            _enemyDestruction.SetTrigger("On_Enemy_Death");
-            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            Destroy(this.gameObject,1.0f);
-            
-=======
-            Destroy(this.gameObject, 1.0f);
-            _enemyExplosionSound.Play();
-
-        }
-        else if (other.tag == "Laser")
-        {
->>>>>>> e451376 (commit reset issue)
-
-            Destroy(other.gameObject);
-            if (_player != null)
+            else if (other.tag == "Laser")
             {
-                _player.Score(10);
+
+                Destroy(other.gameObject);
+                if (_player != null)
+                {
+                    _player.Score(10);
+                }
+                _enemyDestruction.SetTrigger("On_Enemy_Death");
+                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                Destroy(this.gameObject, 1.0f);
+                _enemyExplosionSound.Play();
+
+
+
             }
-            _enemyDestruction.SetTrigger("On_Enemy_Death");
-            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            Destroy(this.gameObject, 1.0f);
-            _enemyExplosionSound.Play();
-
-
-
+            else if (other.tag == "EnemyLaser")
+            {
+                //do nothing 
+            }
         }
-        else if (other.tag == "EnemyLaser")
-        {
-            //do nothing 
-        }
-
     }
 }

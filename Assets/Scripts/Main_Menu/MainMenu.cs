@@ -5,11 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-<<<<<<< HEAD
- 
-=======
-
->>>>>>> e451376 (commit reset issue)
     public void LoadGame()
     {
         SceneManager.LoadScene(1);//main game scene

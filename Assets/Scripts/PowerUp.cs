@@ -7,11 +7,8 @@ public class PowerUp : MonoBehaviour
 {
     [SerializeField]
     private int _speed = 3;
-<<<<<<< HEAD
+
     [SerializeField] // 0 triple shot 1 = speed 2 = shield
-=======
-    [SerializeField] // 0 triple shot, 1 = speed, 2 = shield
->>>>>>> e451376 (commit reset issue)
     private int _powerUpID;
 
     private AudioSource _powerUpSound;
@@ -49,11 +46,9 @@ public class PowerUp : MonoBehaviour
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
-<<<<<<< HEAD
-                switch(_powerUpID)
-=======
+
                 switch (_powerUpID)
->>>>>>> e451376 (commit reset issue)
+
                 {
                     case 0:
                         player.TripleShotActive();
@@ -63,30 +58,28 @@ public class PowerUp : MonoBehaviour
                         break;
                     case 2:
                         player.ShieldPowerUpActive();
-<<<<<<< HEAD
-=======
+
                         //reset the shield health visualization 
                         player.shieldStrength = 3;
                         GameObject.Find("Shields").GetComponent<SpriteRenderer>().material.color = Color.white;
->>>>>>> e451376 (commit reset issue)
+
                         break;
                     default:
                         Debug.Log("no power up");
                         break;
                 }
-<<<<<<< HEAD
-                
-            }
-=======
->>>>>>> e451376 (commit reset issue)
+
 
             }
-            _powerUpSound.Play();
-            Destroy(this.gameObject);
+
+
+
         }
-
+        _powerUpSound.Play();
+        Destroy(this.gameObject);
     }
+}
 
         
-}
+
 
