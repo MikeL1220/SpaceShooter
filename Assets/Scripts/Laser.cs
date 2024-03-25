@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Laser : MonoBehaviour
 {
     private int _laserSpeed = 8;
@@ -23,4 +24,5 @@ public class Laser : MonoBehaviour
 
         }
     }
+
 }

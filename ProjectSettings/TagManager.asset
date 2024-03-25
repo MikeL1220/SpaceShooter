@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Laser
+  - EnemyLaser
+  - Shield PowerUp
   layers:
   - Default
   - TransparentFX
@@ -13,7 +15,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - 'Post Proccesing '
   - 
   - 
   - 
@@ -48,4 +50,7 @@ TagManager:
     locked: 0
   - name: ForeGround
     uniqueID: 3485032479
+    locked: 0
+  - name: Post_Processing
+    uniqueID: 500356129
     locked: 0
